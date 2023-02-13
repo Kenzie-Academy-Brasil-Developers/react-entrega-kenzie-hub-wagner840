@@ -1,7 +1,7 @@
 import * as yup from "yup";
 
 export const registerFormSchema = yup.object().shape({
-  nome: yup.string().required("O nome é obrigatorio."),
+  name: yup.string().required("O nome é obrigatorio."),
   email: yup
     .string()
     .required("O email é obrigatorio.")

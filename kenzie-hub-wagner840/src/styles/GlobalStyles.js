@@ -9,8 +9,10 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
   body{
+      position: absolute;
         width: 100vw;
         height: 100vh;
+        background:#000000;
     }
 
     button{
