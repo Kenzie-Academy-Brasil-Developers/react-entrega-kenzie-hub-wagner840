@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { Button } from "../../components/Button/Button.jsx";
@@ -7,8 +7,10 @@ import { Input } from "../../components/Input/Input.jsx";
 import { NavBar } from "../../components/NavBar/NavBar.jsx";
 import { loginFormSchema } from "./loginSchemaForm.js";
 import { LoginPageStyled } from "./LoginPageStyled.js";
+import { UserContext } from "../../providers/UserContext.jsx";
 
-function LoginPage({ loginUser }) {
+function LoginPage() {
+  const { loginUser } = useContext(UserContext);
   const {
     register,
     handleSubmit,
@@ -18,8 +20,6 @@ function LoginPage({ loginUser }) {
   });
 
   function onSubmit(formDataLogin) {
-    console.log(formDataLogin);
-
     loginUser(formDataLogin);
   }
 

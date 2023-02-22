@@ -7,12 +7,16 @@ export const NavBarStyled = styled.nav`
   width: 100%;
   height: 10vh;
 
-  align-items: flex-end;
+  align-items: center;
   flex-direction: row;
   justify-content: space-around;
   ${media.desktop} {
     margin: 0 auto;
     width: 40%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
   button {
     background: #212529;
@@ -21,5 +25,9 @@ export const NavBarStyled = styled.nav`
     color: white;
     border: none;
     height: 42%;
+    ${media.desktop} {
+      width: 15%;
+      height: 30%;
+    }
   }
 `;

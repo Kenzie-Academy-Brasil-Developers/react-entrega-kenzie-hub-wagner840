@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
       position: absolute;
         width: 100vw;
         height: 100vh;
-        background:#000000;
+        background:var(--grey-color-4);
     }
 
     button{
@@ -74,7 +74,4 @@ font-weight: 400;
 font-size: 12.182px;
 line-height: 22px;
 }
-
-
-
 `;

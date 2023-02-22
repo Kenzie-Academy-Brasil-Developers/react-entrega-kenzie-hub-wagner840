@@ -5,8 +5,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { registerFormSchema } from "./registerFormSchema.js";
 import { NavBar } from "../../components/NavBar/NavBar.jsx";
 import { RegisterPageStyled } from "./RegisterPage.js";
+import { useContext } from "react";
+import { UserContext } from "../../providers/UserContext.jsx";
 
-function RegisterPage({ registerUser }) {
+function RegisterPage() {
+  const { registerUser } = useContext(UserContext);
   const {
     register,
     handleSubmit,
@@ -17,7 +20,6 @@ function RegisterPage({ registerUser }) {
   });
 
   function onSubmit(formData) {
-    console.log(formData);
     registerUser(formData);
     reset();
   }
@@ -89,21 +91,19 @@ function RegisterPage({ registerUser }) {
             id="course_module"
             {...register("course_module")}
           >
-            <option value="Primeiro Módulo">
+            <option value=" Primeiro módulo (Introdução ao Frontend)">
               Primeiro módulo (Introdução ao Frontend)
             </option>
-            <option value="Segundo Módulo">
+            <option value="Segundo módulo (Frontend Avançado)">
               Segundo módulo (Frontend Avançado)
             </option>
-            <option value="Terceiro Módulo">
+            <option value="Terceiro módulo (Introdução ao Backend)">
               Terceiro módulo (Introdução ao Backend)
             </option>
-            <option value="Quarto Módulo">
+            <option value="Quarto módulo (Backend Avançado)">
               Quarto módulo (Backend Avançado)
             </option>
           </select>
-
-          {console.log(errors)}
 
           <Button prop={"Cadastrar"} />
         </form>

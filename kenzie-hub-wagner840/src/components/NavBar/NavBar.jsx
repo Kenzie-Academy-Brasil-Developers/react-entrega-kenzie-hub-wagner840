@@ -1,5 +1,4 @@
 import logo from "../../assets/images/Logo.svg";
-
 import { useNavigate } from "react-router-dom";
 import { Button } from "../Button/Button.jsx";
 import { NavBarStyled } from "./NavBar";
@@ -8,7 +7,6 @@ export function NavBar({ showButton = true, text }) {
   function logOut() {
     localStorage.removeItem("@Token:");
     localStorage.removeItem("@UserID:");
-
     navigate("/");
   }
   return (

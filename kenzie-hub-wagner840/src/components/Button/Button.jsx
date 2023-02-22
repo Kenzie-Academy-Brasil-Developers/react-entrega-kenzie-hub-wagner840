@@ -1,6 +1,6 @@
-export function Button({ event, prop }) {
+export function Button({ identifier, event, prop }) {
   return (
-    <button type="submit" onClick={event}>
+    <button className={identifier} type="submit" onClick={event}>
       {prop}
     </button>
   );
