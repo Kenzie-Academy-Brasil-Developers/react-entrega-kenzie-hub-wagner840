@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { createContext } from "react";
+import { toast } from "react-toastify";
 import { api } from "../services/api";
 import { UserContext } from "./UserContext";
 
@@ -15,9 +16,28 @@ export function TechProvider({ children }) {
           Authorization: `Bearer ${localStorage.getItem("@Token:")}`,
         },
       });
+      toast.success("Tecnologia adicionada com sucesso", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       setTech([...tech, response.data]);
     } catch (error) {
-      console.log(error);
+      toast.error("Ops! Algo deu errado", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   }
 
@@ -28,14 +48,74 @@ export function TechProvider({ children }) {
           Authorization: `Bearer ${localStorage.getItem("@Token:")}`,
         },
       });
+      toast.success("Tecnologia deletada com sucesso", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       setTech(tech.filter((tec) => tec.id != tecTodelete.id));
     } catch (error) {
-      console.log(error);
+      toast.error("Ops! Algo deu errado", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   }
-
+  async function updateTech(tecToUpdate) {
+    try {
+      const response = await api.put(
+        `/users/techs/${tecToUpdate.id}`,
+        tecToUpdate,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("@Token:")}`,
+          },
+        }
+      );
+      toast.success("Tecnologia atualizada com sucesso", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setTech((oldTech) =>
+        oldTech.map((tec) =>
+          tec.id === response.data.id ? response.data : tec
+        )
+      );
+      console.log(tech);
+    } catch (error) {
+      toast.error("Ops! Algo deu errado", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  }
   return (
-    <TechContext.Provider value={{ tech, setTech, addTech, deleteTech }}>
+    <TechContext.Provider
+      value={{ tech, setTech, addTech, deleteTech, updateTech }}
+    >
       {children}
     </TechContext.Provider>
   );

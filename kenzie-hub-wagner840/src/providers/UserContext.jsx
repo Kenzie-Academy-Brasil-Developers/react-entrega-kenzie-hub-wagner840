@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { api } from "../services/api";
 
 export const UserContext = createContext({});
@@ -7,19 +8,35 @@ export const UserContext = createContext({});
 export function UserProvider({ children }) {
   const [tech, setTech] = useState({});
 
-  // Register
-
   const navigate = useNavigate();
   async function registerUser(formData) {
     try {
       const response = await api.post("/users", formData);
+      toast.success("Cadastro realizado com sucesso", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       navigate("/");
     } catch (error) {
-      console.log(error);
+      toast.error("Ops! Algo deu errado", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   }
 
-  //Login
   const [user, setUser] = useState({});
 
   async function loginUser(formDataLogin) {
@@ -29,9 +46,28 @@ export function UserProvider({ children }) {
       localStorage.setItem("@UserID:", response.data.user.id);
       setUser(response.data.user.id);
       setTech(response.data.user.techs);
+      toast.success("Login realizado com sucesso", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       navigate("/home");
     } catch (error) {
-      console.log(error);
+      toast.error("Email ou senha incorretos", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   }
 

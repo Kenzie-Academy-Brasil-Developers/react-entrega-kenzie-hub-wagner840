@@ -7,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { modalFormSchema } from "./modalSchemaForm.js";
 import { TechContext } from "../../providers/TechContext.jsx";
 import { ModalStyled } from "./Modal.js";
+
 export function Modal() {
   const { setOpenModal } = useContext(HomePageContext);
   const { addTech } = useContext(TechContext);

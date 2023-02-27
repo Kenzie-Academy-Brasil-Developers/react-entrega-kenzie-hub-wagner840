@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 const media = {
   desktop: "@media(min-width: 1023px)",
 };
@@ -43,7 +44,8 @@ export const RegisterPageStyled = styled.div`
     color: var(--grey-color-0);
     justify-content: center;
     input {
-      border: none;
+      border: 0.973988px solid #343b41;
+      border-radius: 3.19812px;
     }
     button {
       color: white;

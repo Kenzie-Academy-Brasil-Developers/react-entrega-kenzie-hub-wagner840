@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 const media = {
   desktop: "@media(min-width: 1023px)",
 };
@@ -25,6 +26,7 @@ export const NavBarStyled = styled.nav`
     color: white;
     border: none;
     height: 42%;
+
     ${media.desktop} {
       width: 15%;
       height: 30%;

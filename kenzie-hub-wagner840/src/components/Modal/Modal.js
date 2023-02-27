@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 const media = {
   desktop: "@media(min-width: 1023px)",
   bigScreen: "@media(min-width: 1440px)",

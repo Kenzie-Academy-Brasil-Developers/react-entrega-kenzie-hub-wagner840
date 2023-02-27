@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 const media = {
   desktop: "@media(min-width: 1023px)",
 };
@@ -37,6 +38,10 @@ export const LoginPageStyled = styled.div`
     flex-direction: column;
     color: var(--grey-color-0);
     justify-content: center;
+    input {
+      border: 1.2182px solid #f8f9fa;
+      border-radius: 4px;
+    }
     button {
       color: white;
       width: 100%;

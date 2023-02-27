@@ -3,10 +3,20 @@ import { HomePageContext } from "../../providers/HomePageContext";
 import { Button } from "../Button/Button.jsx";
 import { TechContext } from "../../providers/TechContext";
 import { ModalDeleteStyled } from "./ModalDelete.js";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { modalDeleteFormSchema } from "./modalDeleteSchemaForm";
 
 function ModalDelete({ techId, onClose }) {
-  const { selectedTechId } = useContext(HomePageContext);
-  const { deleteTech } = useContext(TechContext);
+  const { selectedTechId, setSelectedTechId } = useContext(HomePageContext);
+  const { deleteTech, updateTech } = useContext(TechContext);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(modalDeleteFormSchema),
+  });
   function handleClose() {
     onClose();
   }
@@ -14,6 +24,22 @@ function ModalDelete({ techId, onClose }) {
     deleteTech(techId);
     onClose();
   }
+  function editTech(event) {
+    const updatedTech = {
+      id: selectedTechId.id,
+      title: selectedTechId.title,
+      status: event.status,
+    };
+    updateTech(updatedTech);
+    onClose();
+  }
+  function handleNameChange(event) {
+    setSelectedTechId({
+      ...selectedTechId,
+      title: event.target.value,
+    });
+  }
+
   return (
     <ModalDeleteStyled>
       <div className="modal-header">
@@ -28,20 +54,30 @@ function ModalDelete({ techId, onClose }) {
             type="text"
             id={selectedTechId.id}
             name={selectedTechId.title}
-            value={selectedTechId.title}
+            value={selectedTechId.title || ""}
+            onChange={handleNameChange}
           />
         </label>
+
         <label htmlFor="status">Status</label>
-        <select name="status" id="status">
-          <option value={selectedTechId.status}>{selectedTechId.status}</option>
-          <option value="Iniciante">Iniciante</option>
-          <option value="Intermediário">Intermediário</option>
-          <option value="">Avançado</option>
-        </select>
-        <div className="buttons">
-          <Button identifier={"save"} prop={"Salvar Alterações"} disabled />
-          <Button identifier={"delete"} prop={"Excluir"} event={handleDelete} />
-        </div>
+        <form onSubmit={handleSubmit(editTech)}>
+          <select name="status" id="status" {...register("status")}>
+            <option value={selectedTechId.status}>
+              {selectedTechId.status}
+            </option>
+            <option value="Iniciante">Iniciante</option>
+            <option value="Intermediário">Intermediário</option>
+            <option value="Avançado">Avançado</option>
+          </select>
+          <div className="buttons">
+            <Button identifier={"save"} prop={"Salvar Alterações"} />
+            <Button
+              identifier={"delete"}
+              prop={"Excluir"}
+              event={handleDelete}
+            />
+          </div>
+        </form>
       </div>
     </ModalDeleteStyled>
   );

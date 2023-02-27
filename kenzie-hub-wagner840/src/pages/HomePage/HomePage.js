@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 const media = {
   desktop: "@media(min-width: 1023px)",
 };
@@ -52,6 +53,7 @@ export const HomePageStyled = styled.div`
       color: white;
       border-radius: 4px;
       background-color: var(--grey-color-3);
+      border: none;
     }
   }
 
